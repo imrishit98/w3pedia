@@ -18,7 +18,7 @@ const Home: NextPage = () => {
       <NavBar />
       <main className="flex w-full h-screen justify-center items-center">
         <h1 className="text-[100px] font-bold">Web3 Tool Kit</h1>
-        <Button>This Button</Button>
+        <Button type="secondary">This Button</Button>
       </main>
     </div>
   );

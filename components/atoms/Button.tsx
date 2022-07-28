@@ -1,12 +1,32 @@
 import React from "react";
 
-export const Button = ({ children, className, ...rest }) => {
+interface IButton {
+  /** the text a button contains. Can also contain icons */
+  children?: string | React.Component;
+  /** classes that override the component's styles */
+  className?: string;
+  /** denotes style */
+  type?: "primary" | "secondary" | "nav";
+}
+
+export const Button = ({
+  children,
+  className,
+  type = "primary",
+  ...rest
+}: IButton) => {
   return (
     <button
-      className={`'text-white bg-violet-700 px-6 py-3 rounded md:rounded-md ${className}`}
+      className={`text-white font- bg-violet-700 hover:bg-violet-800 active:bg-violet-900 px-4 py-2 rounded md:rounded-md ${
+        type === "secondary" &&
+        "bg-gray-600 hover:bg-gray-700 active:bg-gray-800"
+      } ${
+        type === "nav" &&
+        "bg-transparent hover:bg-gray-700 active:bg-gray-800 px-3 py-2 mx-2"
+      } ${className}`}
       {...rest}
     >
-      {children}
+      {children as any}
     </button>
   );
 };
