@@ -17,7 +17,7 @@ export const Button = ({
 }: IButton) => {
   return (
     <button
-      className={`text-white font- bg-violet-700 hover:bg-violet-800 active:bg-violet-900 px-4 py-2 rounded md:rounded-md ${
+      className={`text-white bg-violet-700 hover:bg-violet-800 active:bg-violet-900 px-4 py-2 rounded md:rounded-md ${
         type === "secondary" &&
         "bg-gray-600 hover:bg-gray-700 active:bg-gray-800"
       } ${
