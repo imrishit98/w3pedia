@@ -7,6 +7,8 @@ import { useTheme } from "next-themes";
 import { FaSun } from "react-icons/fa";
 import { BsMoonStarsFill } from "react-icons/bs";
 
+import { Button, NavListItem } from "../atoms";
+
 export const NavBar: NextPage = () => {
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setmounted] = useState(false);
@@ -31,69 +33,66 @@ export const NavBar: NextPage = () => {
       return null;
     }
     const currentTheme = theme === "system" ? systemTheme : theme;
-    console.log(currentTheme);
+    // console.log(currentTheme);
 
     if (currentTheme === "dark") {
-      console.log("here");
-      return (
-        <FaSun
-          className="w-[25px] h-[25px]"
-          color="white"
-          role="button"
-          onClick={() => setTheme("light")}
-        />
-      );
+      // console.log("here");
+      return <FaSun className="w-6 h-6" color="white" />;
     } else {
-      console.log("here");
-      return (
-        <BsMoonStarsFill
-          className="w-[25px] h-[25px]"
-          color="white"
-          role="button"
-          onClick={() => setTheme("dark")}
-        />
-      );
+      // console.log("here");
+      return <BsMoonStarsFill className="w-6 h-6" color="white" />;
     }
   };
 
   useEffect(() => {
-    console.log("useffect");
+    // console.log("useffect");
     setmounted(true);
   }, []);
 
   return (
     <div>
-      <div className="bg-[#343038] h-[67px] shadow-lg flex flex-row justify-between items-center">
+      <div className="bg-[#343038] shadow-lg flex flex-row justify-between items-center">
         <title>Web3Pedia</title>
 
         <Link href="/">
-          <a className="text-white text-xs ml-[25px]">Web3Pedia</a>
+          <a className="text-white font-thin text-2xl ml-[25px]">
+            <span className="font-medium">Web3</span>pedia
+          </a>
         </Link>
 
-        <ol className="flex">
+        <ol className="flex items-center">
           {navTabs.map((tab, index) => {
             return (
-              <li key={index} className="mx-6 my-[10px]">
+              <NavListItem key={index}>
                 <Link href={tab.route}>
-                  <a className="text-white">{tab.label}</a>
+                  <Button className="text-white h-full" type="nav">
+                    {tab.label}
+                  </Button>
                 </Link>
-              </li>
+              </NavListItem>
             );
           })}
-          <li className="mx-6 my-[10px]">
-            <div>{renderThemeChanger()}</div>
-          </li>
-          <li className="border-[1px] border-white mx-3 my-[10px]"></li>
-          <li className="mx-6 my-[10px]">
+          <NavListItem>
+            <Button
+              type="nav"
+              onClick={() =>
+                theme === "dark" ? setTheme("light") : setTheme("dark")
+              }
+            >
+              {renderThemeChanger()}
+            </Button>
+          </NavListItem>
+          <div className="border-[1px] h-6 border-white mx-3 my-[10px]"></div>
+          <NavListItem>
             <Link href="/">
-              <a className="text-white font-bold">Login</a>
+              <Button type="nav">Login</Button>
             </Link>
-          </li>
-          <li className="mx-6 ">
-            <button className="text-white bg-[#7A00FF] px-[24px] py-[12px] rounded md:rounded-md">
-              Sign Up
-            </button>
-          </li>
+          </NavListItem>
+          <NavListItem className="my-2 mr-3">
+            <Link href="/">
+              <Button type="primary">Sign Up</Button>
+            </Link>
+          </NavListItem>
         </ol>
       </div>
     </div>
